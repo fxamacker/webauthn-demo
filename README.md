@@ -1,3 +1,6 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/fxamacker/webauthn-demo)](https://goreportcard.com/report/github.com/fxamacker/webauthn-demo)
+[![GitHub](https://img.shields.io/github/license/fxamacker/webauthn-demo)](https://github.com/fxamacker/webauthn-demo/blob/master/LICENSE)
+
 # WebAuthn demo in Go
 
 `webauthn demo` is a web application that supports [WebAuthn](https://w3c.github.io/webauthn/) registration and authentication.  It implements [proposed REST API](https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-server-v2.0-rd-20180702.html#transport-binding-profile) for FIDO2 servers.
