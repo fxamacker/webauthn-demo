@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="WebAuthn demo for FIDO2 passwordless authentication">
+    <meta name="author" content="Faye Amacker">
+    <title>Sign in</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+      .signin {
+        min-width: 300px;
+        max-width: 500px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="signin">
+      <div class="py-5 text-center">
+        <h2>Sign in</h2>
+      </div>
+      <div class="card p-4 mb-3 shadow-sm">
+        <form id="login" class="needs-validation" novalidate>
+          <div class="form-group">
+            <label for="username">Email address</label>
+            <input type="email" class="form-control" id="username" name="username" placeholder="johndoe@example.com" required>
+            <div class="invalid-feedback">
+              Your email is required.
+            </div>
+          </div>
+          <div class="form-group mb-4">
+              <label for="userverification">User verification</label>
+              <select class="custom-select d-block w-100" id="userverification" name="userverification" required>
+                <option value="required">Required</option>
+                <option selected value="preferred">Preferred</option>
+                <option value="discouraged">Discouraged</option>              
+              </select>
+          </div>        
+          <button class="btn btn-primary btn-block" type="submit" value="login">Sign in</button>
+        </form>
+      </div>
+      <div class="card p-4 shadow-sm text-center">
+        <span>Not registered?&nbsp;&nbsp;<a href="/signup.html">Sign up.</a></span>
+      </div>
+      <footer class="my-5 pt-5 text-center text-muted">
+        <p class="mb-1">
+          <small>Copyright &copy; 2019 <a href="https://github.com/fxamacker">Faye Amacker</a></small>
+        </p>
+        <p class="mb-1">
+          <small>The source code is available on <a href="https://github.com/fxamacker/webauthndemo">Github</a>, licensed under <a href="https://github.com/fxamacker/webauthndemo/LICENSE">Apache License 2.0.</a></small>
+        </p>
+      </footer>
+    </div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/base64url.js"></script>
+    <script src="js/webauthn.authn.js"></script>
+  </body>
+</html>

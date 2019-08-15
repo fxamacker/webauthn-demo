@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="WebAuthn demo for FIDO2 passwordless authentication">
+    <meta name="author" content="Faye Amacker">
+    <title>User profile</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+      .signin {
+        min-width: 300px;
+        max-width: 500px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+      } 
+      #profileContainer, #footerContainer {
+        display: none;
+      }      
+    </style>
+  </head>
+  <body class="bg-light">
+    <div id="profileContainer" class="signin">
+      <div class="py-5 text-center">
+        <h2><span id="name"></span>&nbsp;(<span id="email"></span>)</h2>
+      </div>      
+      <div class="card p-4 mb-3 shadow-sm">
+        <div class="mb-4">
+          <div>Credential ID</div>
+          <div id="credentialID" class="text-muted"></div>
+        </div>
+        <div class="mb-4">
+          <div>Registered at</div>
+          <div id="registeredAt" class="text-muted"></div>
+        </div>
+        <div class="mb-4">
+          <div>Last signed in at</div>
+          <div id="loggedInAt" class="text-muted"></div>
+        </div> 
+        <button class="btn btn-primary btn-block" type="submit" id="logout" value="logout">Log out</button>
+      </div>
+    </div>
+    <footer id="footerContainer" class="my-5 pt-5 text-center text-muted">
+      <p class="mb-1">
+        <small>Copyright &copy; 2019 <a href="https://github.com/fxamacker">Faye Amacker</a></small>
+      </p>
+      <p class="mb-1">
+        <small>The source code is available on <a href="https://github.com/fxamacker/webauthndemo">Github</a>, licensed under <a href="https://github.com/fxamacker/webauthndemo/LICENSE">Apache License 2.0.</a></small>
+      </p>
+    </footer>      
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        fetch('/user', {credentials: 'include'})
+        .then((response) => {
+          if (response.status == 401) {
+            window.location.href = "/signin.html"
+          }
+          if (response.headers.get('Content-Type') !== 'application/json') {
+            throw new TypeError("/user response header has unexpected Content-Type: " + response.headers.get('Content-Type'));
+          }
+          return response.json()
+        })
+        .then((responseJson) => {
+          if(responseJson.status === 'ok') {
+            $('#name').html(responseJson.displayName)
+            $('#email').html(responseJson.name)
+            $('#credentialID').html(responseJson.credentialID)
+            $('#registeredAt').html(responseJson.registeredAt)
+            $('#loggedInAt').html(responseJson.loggedInAt)
+            $('#profileContainer').show(); 
+            $('#footerContainer').show(); 
+          } else {
+            alert(`${responseJson.errorMessage}`)
+            window.location.href = "/signin.html"
+          }
+        })        
+        .catch((error) => alert(error))        
+      })
+      $('#logout').click(function(event) {
+        fetch('/logout', {credentials: 'include'})
+        .then((response) => {
+          if (response.headers.get('Content-Type') !== 'application/json') {
+            throw new TypeError("/logout response header has unexpected Content-Type: " + response.headers.get('Content-Type'));
+          }
+          return response.json()
+        })
+        .then((responseJson) => {
+          if(responseJson.status === 'ok') {
+            window.location.href = "/signin.html"
+          }
+        })
+        .catch((error) => alert(error))        
+      })      
+    </script>      
+  </body>
+</html>

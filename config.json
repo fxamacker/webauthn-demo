@@ -1,0 +1,15 @@
+{
+    "WebAuthn": {
+        "RPID": "localhost",
+        "RPName": "WebAuthn demo",
+        "RPIcon": "",
+        "Timeout": 30000,
+        "ChallengeLength": 32,
+        "AuthenticatorAttachment": "",
+        "ResidentKey": "preferred",
+        "UserVerification": "preferred",
+        "Attestation": "direct",
+        "CredentialAlgs": [ -7, -37, -257 ]
+    },
+    "Origin": "https://localhost:8443"
+}
