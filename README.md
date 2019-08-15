@@ -56,7 +56,7 @@ func (s *server) handleAttestationOptions(w http.ResponseWriter, r *http.Request
     u, _ := s.dataStore.getUser(r.Context(), optionsRequest.Username)
     
     // Create PublicKeyCredentialCreationOptions using webauthn library.
-	creationOptions, _ := webauthn.NewAttestationOptions(s.webAuthnConfig, &webauthn.User{ID: u.UserID, Name: u.UserName, DisplayName: u.DisplayName, CredentialIDs: u.CredentialIDs})
+    creationOptions, _ := webauthn.NewAttestationOptions(s.webAuthnConfig, &webauthn.User{ID: u.UserID, Name: u.UserName, DisplayName: u.DisplayName, CredentialIDs: u.CredentialIDs})
 
     // Save creationOptions and user info in session to verify new credential later.
     session.Values[WebAuthnCreationOptions] = creationOptions
@@ -73,29 +73,29 @@ Server verifies and registers new credentials received via `/attestation/result`
 ```
 // Simplified `/attestation/result` handler from registration_handlers.go
 func (s *server) handleAttestationResult(w http.ResponseWriter, r *http.Request) {
-	// Get saved creationOptions and user info from session.
+    // Get saved creationOptions and user info from session.
 
-	// Parse and verify credential in request body.
-	credentialAttestation, _ := webauthn.ParseAttestation(r.Body)
-	expected := &webauthn.AttestationExpectedData{
-		Origin:           s.rpOrigin,
-		RPID:             savedCreationOptions.RP.ID,
-		CredentialAlgs:   credentialAlgs,
-		Challenge:        base64.RawURLEncoding.EncodeToString(savedCreationOptions.Challenge),
-		UserVerification: savedCreationOptions.AuthenticatorSelection.UserVerification,
-	}    
-	_, _, err = webauthn.VerifyAttestation(credentialAttestation, expected)
+    // Parse and verify credential in request body.
+    credentialAttestation, _ := webauthn.ParseAttestation(r.Body)
+    expected := &webauthn.AttestationExpectedData{
+	Origin:           s.rpOrigin,
+	RPID:             savedCreationOptions.RP.ID,
+	CredentialAlgs:   credentialAlgs,
+	Challenge:        base64.RawURLEncoding.EncodeToString(savedCreationOptions.Challenge),
+	UserVerification: savedCreationOptions.AuthenticatorSelection.UserVerification,
+    }    
+    _, _, err = webauthn.VerifyAttestation(credentialAttestation, expected)
 
-	// Save user credential in datastore.
-	c := &credential{
-		CredentialID: credentialAttestation.RawID,
-		UserID:       uSession.User.UserID,
-		Counter:      credentialAttestation.AuthnData.Counter,
-		CoseKey:      credentialAttestation.AuthnData.Credential.Raw,
-	}    
-	err = s.dataStore.addUserCredential(r.Context(), uSession.User, c)
+   // Save user credential in datastore.
+   c := &credential{
+	CredentialID: credentialAttestation.RawID,
+	UserID:       uSession.User.UserID,
+	Counter:      credentialAttestation.AuthnData.Counter,
+	CoseKey:      credentialAttestation.AuthnData.Credential.Raw,
+   }    
+   err = s.dataStore.addUserCredential(r.Context(), uSession.User, c)
 
-    // Write "ok" response. 
+   // Write "ok" response. 
 }
 ```
 
@@ -116,7 +116,7 @@ func (s *server) handleAssertionOptions(w http.ResponseWriter, r *http.Request) 
     // Create PublicKeyCredentialRequestOptions using webauthn library.
     requestOptions, _ := webauthn.NewAssertionOptions(s.webAuthnConfig, &webauthn.User{ID: u.UserID, Name: u.UserName, DisplayName: u.DisplayName, CredentialIDs: u.CredentialIDs})
 
-	// Save requestOptions and user info in session to verify credential later.
+    // Save requestOptions and user info in session to verify credential later.
     session.Values[WebAuthnRequestOptions] = requestOptions
     session.Values[UserSession] = &userSession{User: u}
 
@@ -131,30 +131,30 @@ Server verifies credentials received via `/asssertion/result`.
 ```
 // Simplified `/assertion/result` handler from authentication_handlers.go
 func (s *server) handleAssertionResult(w http.ResponseWriter, r *http.Request) {
-	// Get saved requestOptions and user info.
+    // Get saved requestOptions and user info.
 
-	// Parse credential in request body.
-	credentialAssertion, _ := webauthn.ParseAssertion(r.Body)
+    // Parse credential in request body.
+    credentialAssertion, _ := webauthn.ParseAssertion(r.Body)
 
-	// Get credential from datastore by received credential ID.
-	c, _ := s.dataStore.getCredential(r.Context(), uSession.User.UserID, credentialAssertion.RawID)
+    // Get credential from datastore by received credential ID.
+    c, _ := s.dataStore.getCredential(r.Context(), uSession.User.UserID, credentialAssertion.RawID)
 
-	// Verify credential.
-	expected := &webauthn.AssertionExpectedData{
-		Origin:            s.rpOrigin,
-		RPID:              savedRequestOptions.RPID,
-		Challenge:         base64.RawURLEncoding.EncodeToString(savedRequestOptions.Challenge),
-		UserVerification:  savedRequestOptions.UserVerification,
-		UserID:            uSession.User.UserID,
-		UserCredentialIDs: userCredentialIDs,
-		PrevCounter:       c.Counter,
-		Credential:        credKey,
-	}
-	err = webauthn.VerifyAssertion(credentialAssertion, expected)
+    // Verify credential.
+    expected := &webauthn.AssertionExpectedData{
+	Origin:            s.rpOrigin,
+	RPID:              savedRequestOptions.RPID,
+	Challenge:         base64.RawURLEncoding.EncodeToString(savedRequestOptions.Challenge),
+	UserVerification:  savedRequestOptions.UserVerification,
+	UserID:            uSession.User.UserID,
+	UserCredentialIDs: userCredentialIDs,
+	PrevCounter:       c.Counter,
+	Credential:        credKey,
+    }
+    err = webauthn.VerifyAssertion(credentialAssertion, expected)
 
-	// Update authenticator counter in datastore.
-	c.Counter = credentialAssertion.AuthnData.Counter
-	err = s.dataStore.updateCredential(r.Context(), c)
+    // Update authenticator counter in datastore.
+    c.Counter = credentialAssertion.AuthnData.Counter
+    err = s.dataStore.updateCredential(r.Context(), c)
 
     // Write "ok" response. 
 }
