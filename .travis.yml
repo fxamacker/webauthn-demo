@@ -8,11 +8,13 @@ go:
 services:
   - postgresql
 
+env:
+  - DB_CONNSTRING="user=testuser password=testpwd host=localhost dbname=webauthn sslmode=disable"
+  
 before-script:
   - psql -a -c "CREATE DATABASE webauthn;" -U postgres
   - psql -a -c "CREATE USER testuser WITH PASSWORD 'testpwd';" -U postgres
   - psql -a -d "webauthn" -f ./createtables.sql -U testuser
-  - export DB_CONNSTRING="user=testuser password=testpwd host=localhost dbname=webauthn sslmode=disable"
 
 script:
   - env GO111MODULE=on go test -coverprofile=coverage.txt -covermode=count ./...
