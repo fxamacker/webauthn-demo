@@ -11,7 +11,7 @@ services:
 env:
   - DB_CONNSTRING="user=testuser password=testpwd host=localhost dbname=webauthn sslmode=disable"
   
-before-script:
+before_script:
   - psql -a -c "CREATE DATABASE webauthn;" -U postgres
   - psql -a -c "CREATE USER testuser WITH PASSWORD 'testpwd';" -U postgres
   - psql -a -d "webauthn" -f ./createtables.sql -U testuser
