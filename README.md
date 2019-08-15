@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/fxamacker/webauthn-demo.svg?branch=master)](https://travis-ci.com/fxamacker/webauthn-demo)
 [![Go Report Card](https://goreportcard.com/badge/github.com/fxamacker/webauthn-demo)](https://goreportcard.com/report/github.com/fxamacker/webauthn-demo)
 [![GitHub](https://img.shields.io/github/license/fxamacker/webauthn-demo)](https://github.com/fxamacker/webauthn-demo/blob/master/LICENSE)
 
