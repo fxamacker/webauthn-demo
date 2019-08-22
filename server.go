@@ -19,7 +19,6 @@ import (
 type server struct {
 	webAuthnConfig *webauthn.Config
 	rpOrigin       string
-	httpServerAddr string
 	dataStore      dataStore
 	sessionStore   sessions.Store
 	router         *mux.Router
@@ -35,9 +34,6 @@ func newServer(c *config) (*server, error) {
 	if strings.ToLower(u.Scheme) != "https" {
 		return nil, errors.New("WebAuthn origin must be https")
 	}
-
-	// Initialize httpServerAddr.
-	httpServerAddr := u.Host
 
 	// Initialize data store.
 	db, err := sql.Open("postgres", c.DBConnString)
@@ -62,7 +58,6 @@ func newServer(c *config) (*server, error) {
 	return &server{
 		webAuthnConfig: c.WebAuthn,
 		rpOrigin:       origin,
-		httpServerAddr: httpServerAddr,
 		dataStore:      dataStore,
 		sessionStore:   rediStore,
 		router:         mux.NewRouter(),

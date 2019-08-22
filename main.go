@@ -35,14 +35,15 @@ const (
 )
 
 func main() {
-	var configFilePath, certFilePath, keyFilePath string
+	var serverAddr, configFilePath, certFilePath, keyFilePath string
+	flag.StringVar(&serverAddr, "addr", "", "web server address")
 	flag.StringVar(&configFilePath, "config", "", "config file path")
 	flag.StringVar(&certFilePath, "cert", "", "cert file path")
 	flag.StringVar(&keyFilePath, "key", "", "key file path")
 
 	flag.Parse()
 
-	if configFilePath == "" || certFilePath == "" || keyFilePath == "" {
+	if serverAddr == "" || configFilePath == "" || certFilePath == "" || keyFilePath == "" {
 		flag.Usage()
 		return
 	}
@@ -80,7 +81,7 @@ func main() {
 	s.routes()
 
 	server := &http.Server{
-		Addr:         s.httpServerAddr,
+		Addr:         serverAddr,
 		WriteTimeout: time.Second * 15,
 		ReadTimeout:  time.Second * 15,
 		IdleTimeout:  time.Second * 60,
