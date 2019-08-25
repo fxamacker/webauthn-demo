@@ -21,29 +21,32 @@ This application is a working demo, not for production.
 go get github.com/fxamacker/webauthn-demo
 ```
 
-## Set up and configuration 
+## Running WebAuthn demo using Docker
 
-* Set up [Redis](https://redis.io) and [PostgreSQL](https://www.postgresql.org) servers.
-* Create a database in PostgreSQL and run [createtables.sql](createtables.sql) script.
-* Edit [config.json](config.json) as needed.
-* Build the application.
-* Set environment variables: 
+```
+$ CERTS_DIR=[folder containing cert.pem and key.pem] docker-compose up
+```
+
+WebAuthn demo runs at https://localhost:8443 on your Docker host.
+
+## Customizing WebAuthn demo using Docker 
+
+* Edit [config.json](config.json) to change WebAuthn server settings as needed.
+* Edit [.env](.env) as needed:
+  * CERTS_DIR: folder containing cert.pem and key.pem.
+  * DB_NAME: database name (default: webauthn).
+  * DB_PASSWORD: database password (default: dockerpwd).
+  * DB_USER: database user (default: docker).
+  * DB_DATA_DIR: database storage folder.
+  * CACHE_DATA_DIR: cache storage folder.
   * SESSION_KEY: base64 encoded session encryption key.
-  * DB_CONNSTRING: PostgreSQL connection string.
-  * REDIS_NETWORK: Redis network, "tcp" by default.
-  * REDIS_ADDR: Redis address, "localhost:6379" by default.
-  * REDIS_PWD: Redis password.
-* Run the application and use command line switches to specify config file, cert file, and key file. 
+* Run WebAuthn demo: 
 
-For example:
 ```
-export SESSION_KEY="U0VTU0lPTl9LRVk" 
-export DB_CONNSTRING="user=testuser password=testpwd host=localhost dbname=webauthn sslmode=disable"
-export REDIS_NETWORK="tcp"
-export REDIS_ADDR="localhost:6379"
-export REDIS_PWD=""
-./webauthn-demo -config=config.json -cert=cert.pem -key=key.pem
+$ docker-compose up
 ```
+
+WebAuthn demo runs at https://localhost:8443 on your Docker host.
 
 ## Registration
 
