@@ -14,7 +14,7 @@ env:
 before_script:
   - psql -a -c "CREATE DATABASE webauthn;" -U postgres
   - psql -a -c "CREATE USER testuser WITH PASSWORD 'testpwd';" -U postgres
-  - psql -a -d "webauthn" -f ./createtables.sql -U testuser
+  - psql -a -d "webauthn" -f ./db/createtables.sql -U testuser
 
 script:
   - env GO111MODULE=on go test -coverprofile=coverage.txt -covermode=count ./...
