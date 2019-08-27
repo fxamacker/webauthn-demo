@@ -4,12 +4,14 @@ sudo: false
 
 go:
   - 1.11.x
+  - 1.12.x
 
 services:
   - postgresql
 
 env:
-  - DB_CONNSTRING="user=testuser password=testpwd host=localhost dbname=webauthn sslmode=disable"
+  - GO111MODULE=on
+  - DB_CONNSTRING="user=testuser password=testpwd host=localhost dbname=webauthn sslmode=disable"  
   
 before_script:
   - psql -a -c "CREATE DATABASE webauthn;" -U postgres
@@ -17,7 +19,7 @@ before_script:
   - psql -a -d "webauthn" -f ./db/createtables.sql -U testuser
 
 script:
-  - env GO111MODULE=on go test -coverprofile=coverage.txt -covermode=count ./...
+  - go test -coverprofile=coverage.txt -covermode=count ./...
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)  
