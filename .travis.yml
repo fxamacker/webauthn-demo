@@ -9,9 +9,8 @@ go:
 services:
   - postgresql
 
-env:
-  - GO111MODULE=on
-  - DB_CONNSTRING="user=testuser password=testpwd host=localhost dbname=webauthn sslmode=disable"  
+env:  
+  - GO111MODULE=on DB_CONNSTRING="user=testuser password=testpwd host=localhost dbname=webauthn sslmode=disable"  
   
 before_script:
   - psql -a -c "CREATE DATABASE webauthn;" -U postgres
