@@ -1,9 +1,9 @@
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/fxamacker/cbor v0.3.0 h1:rch75yatBkBXmHstlseSMIdsfnfUixoIYr0WqUhn2tc=
-github.com/fxamacker/cbor v0.3.0/go.mod h1:Uy2lR31/2WfmW0yiA4i3t+we5kF3B/wzKsttcux+i/g=
-github.com/fxamacker/webauthn v0.0.0-20190905225236-5451348dca32 h1:DWzvsKF4eet109gUg4d9NNH95+02fruUH90tXpNhk64=
-github.com/fxamacker/webauthn v0.0.0-20190905225236-5451348dca32/go.mod h1:rT7issBpJE0JtFwrnSQC2ksf1q5em318O3VmRURT6Vs=
+github.com/fxamacker/cbor v1.1.0 h1:b76vFuvtVIb+IgzSA+m155ANKcYY/cDCTZpW0s/HlNA=
+github.com/fxamacker/cbor v1.1.0/go.mod h1:Uy2lR31/2WfmW0yiA4i3t+we5kF3B/wzKsttcux+i/g=
+github.com/fxamacker/webauthn v0.0.0-20191008185242-5e5d0d8d7368 h1:oOCB1dSbQ7tiSus+VmbSqjdOoQsbnETA5fquetgge9g=
+github.com/fxamacker/webauthn v0.0.0-20191008185242-5e5d0d8d7368/go.mod h1:yhbLntGwioGexEuZFeUgvClAKAv0MzpTsKi1nzhALh8=
 github.com/garyburd/redigo v1.6.0 h1:0VruCpn7yAIIu7pWVClQC8wxCJEcG3nyzpMSHKi1PQc=
 github.com/garyburd/redigo v1.6.0/go.mod h1:NR3MbYisc3/PwhQ00EMzDiPmrwpPxAn5GI05/YaO1SY=
 github.com/gorilla/mux v1.7.3 h1:gnP5JzjVOuiZD07fKKToCAOjS0yOpj/qPETTXCCS6hw=
