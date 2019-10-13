@@ -28,7 +28,7 @@ func newConfig(configFile io.Reader) (*config, error) {
 	var err error
 	c := &config{}
 	if err := json.NewDecoder(configFile).Decode(c); err != nil {
-		return nil, errors.New("Failed to decode config file: " + err.Error())
+		return nil, errors.New("failed to decode config file: " + err.Error())
 	}
 	if err := c.WebAuthn.Valid(); err != nil {
 		return nil, err
@@ -38,7 +38,7 @@ func newConfig(configFile io.Reader) (*config, error) {
 	}
 	c.SessionKey, err = base64.RawStdEncoding.DecodeString(os.Getenv("SESSION_KEY"))
 	if err != nil {
-		return nil, errors.New("Failed to base64 decode session key: " + err.Error())
+		return nil, errors.New("failed to base64 decode session key: " + err.Error())
 	}
 	if len(c.SessionKey) == 0 {
 		return nil, errors.New("SESSION_KEY is empty")

@@ -25,7 +25,7 @@ func (m *sessionHandler) storeSessionInContext(ctx context.Context, r *http.Requ
 		// Get session data.
 		session, err := m.server.sessionStore.Get(r, sessionName)
 		if err != nil {
-			return nil, errors.New("Failed to retrieve session \"" + sessionName + "\": " + err.Error())
+			return nil, errors.New("failed to retrieve session \"" + sessionName + "\": " + err.Error())
 		}
 		// Store session in context.
 		ctx = context.WithValue(ctx, contextKey(sessionName), session)

@@ -137,7 +137,7 @@ var (
 				"SESSION_KEY":   base64.RawStdEncoding.EncodeToString([]byte("secure_session_key")),
 				"DB_CONNSTRING": "user=testuser password=testpassword host=localhost dbname=testdb",
 			},
-			wantErrorMsg: "Failed to decode config file: EOF",
+			wantErrorMsg: "failed to decode config file: EOF",
 		},
 		{
 			name:              "invalid webauthn config",
