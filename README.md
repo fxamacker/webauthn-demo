@@ -13,7 +13,9 @@ This application uses the following components:
 * Redis for session storage. 
 * PostgreSQL for data persistence.  
 
-This application is a working demo, not for production.
+## Current status
+
+This is a working demo, not for production use.
 
 ## Installation 
 
