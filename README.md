@@ -2,12 +2,14 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/fxamacker/webauthn-demo)](https://goreportcard.com/report/github.com/fxamacker/webauthn-demo)
 [![GitHub](https://img.shields.io/github/license/fxamacker/webauthn-demo)](https://github.com/fxamacker/webauthn-demo/blob/master/LICENSE)
 
-# WebAuthn demo in Go
+# WebAuthn web app in Go
 
-`webauthn demo` is a web application that supports [WebAuthn](https://w3c.github.io/webauthn/) registration and authentication.  It implements [proposed REST API](https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-server-v2.0-rd-20180702.html#transport-binding-profile) for FIDO2 servers.
+This web app is a demo for my [WebAuthn library](https://www.github.com/fxamacker/webauthn) (fxamacker/webauthn).  This demo is not for production use.
 
-This application uses the following components:
-* [`webauthn`](https://www.github.com/fxamacker/webauthn) library to parse and validate registration and authentication requests.
+It supports [WebAuthn](https://w3c.github.io/webauthn/) registration and authentication.  It implements [proposed REST API](https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-server-v2.0-rd-20180702.html#transport-binding-profile) for FIDO2 servers.
+
+The following components are used:
+* [fxamacker/webauthn](https://www.github.com/fxamacker/webauthn) to parse and validate registration and authentication requests.
 * Bootstrap and jQuery for web interface.
 * gorilla/mux for routing and gorilla/sessions for session management.
 * Redis for session storage. 
@@ -15,7 +17,7 @@ This application uses the following components:
 
 ## Current status
 
-This is a working demo, not for production use.
+This demo is not for production use.
 
 ## Installation 
 
