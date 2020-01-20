@@ -2,22 +2,33 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/fxamacker/webauthn-demo)](https://goreportcard.com/report/github.com/fxamacker/webauthn-demo)
 [![GitHub](https://img.shields.io/github/license/fxamacker/webauthn-demo)](https://github.com/fxamacker/webauthn-demo/blob/master/LICENSE)
 
-# WebAuthn web app in Go
+# WebAuthn Server Demo (Go/Golang)
 
-This web app is a demo for my [WebAuthn library](https://www.github.com/fxamacker/webauthn) (fxamacker/webauthn).  This demo is not for production use.
+This web app is a demo for my [WebAuthn server library](https://www.github.com/fxamacker/webauthn) (fxamacker/webauthn).  It supports [WebAuthn](https://w3c.github.io/webauthn/) registration and authentication.  It implements [proposed REST API](https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-server-v2.0-rd-20180702.html#transport-binding-profile) for FIDO2 servers.
 
-It supports [WebAuthn](https://w3c.github.io/webauthn/) registration and authentication.  It implements [proposed REST API](https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-server-v2.0-rd-20180702.html#transport-binding-profile) for FIDO2 servers.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/57072051/68431219-4e066780-0177-11ea-8a3f-5a137cc76cf1.png" alt="Picture of FIDO U2F key">
+</p>
 
-The following components are used:
+## What's WebAuthn?
+WebAuthn (Web Authentication) is a [W3C web standard](https://www.w3.org/TR/webauthn/) for authenticating users to web-based apps and services.  It's a core component of [FIDO2](https://en.wikipedia.org/wiki/FIDO2_Project), the successor of FIDO U2F legacy protocol.
+
+## Demo WebAuthn Server Components
+
 * [fxamacker/webauthn](https://www.github.com/fxamacker/webauthn) to parse and validate registration and authentication requests.
 * Bootstrap and jQuery for web interface.
 * gorilla/mux for routing and gorilla/sessions for session management.
 * Redis for session storage. 
 * PostgreSQL for data persistence.  
 
-## Current status
+## Current Status
 
-This demo is not for production use.
+This demo is not for production use because it's designed to be a demo.
+
+## System Requirements
+
+* Go 1.12 (or newer)
+* Tested on x86_64 but it should work on other little-endian systems supported by Go.
 
 ## Installation 
 
@@ -25,7 +36,7 @@ This demo is not for production use.
 go get github.com/fxamacker/webauthn-demo
 ```
 
-## Running WebAuthn demo using Docker
+## Running WebAuthn Demo Using Docker
 
 ```
 $ CERTS_DIR=[folder containing cert.pem and key.pem] docker-compose up
@@ -33,7 +44,7 @@ $ CERTS_DIR=[folder containing cert.pem and key.pem] docker-compose up
 
 WebAuthn demo runs at https://localhost:8443 on your Docker host.
 
-## Customizing WebAuthn demo using Docker 
+## Customizing WebAuthn Demo Using Docker 
 
 * Edit [config.json](config.json) to change WebAuthn server settings as needed.
 * Edit [.env](.env) as needed:
@@ -171,8 +182,24 @@ func (s *server) handleAssertionResult(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
+## Security Policy
+
+Security fixes are provided for the latest released version.
+
+To report security vulnerabilities, please email faye.github@gmail.com and allow time for the problem to be resolved before reporting it to the public.
+
 ## License 
 
-Copyright (c) 2019 [Faye Amacker](https://github.com/fxamacker)
+Copyright (c) 2019-present [Faye Amacker](https://github.com/fxamacker)
 
-Licensed under [Apache License 2.0](LICENSE)
+Licensed under the [Apache License, Version 2.0 (the "License")](LICENSE);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
